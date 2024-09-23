@@ -7,15 +7,15 @@
 	"author": "Yuhei Yasuda <yuhei.yasuda1003@gmail.com> (https://yuheiy.com/)",
 	"type": "module",
 	"exports": {
-		"types": "./dist/index.d.ts",
-		"default": "./dist/index.js"
+		"types": "./dist/src/index.d.ts",
+		"default": "./dist/src/index.js"
 	},
-	"files": [
-		"dist"
-	],
+	"files": ["dist/src"],
 	"scripts": {
 		"build": "tsc --build",
 		"check": "biome check --write",
+		"clean": "git clean -fx dist/",
+		"prepare": "npm run clean && npm run build",
 		"test": "vitest"
 	},
 	"dependencies": {

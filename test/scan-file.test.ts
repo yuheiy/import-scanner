@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { scanFile } from '../src/scan-file';
+import { scanFile } from '../src/scan-file.js';
 
 describe('scanFile', () => {
 	test('default import', () => {
