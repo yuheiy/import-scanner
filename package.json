@@ -1,6 +1,6 @@
 {
 	"name": "@yuheiy/import-scanner",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"description": "Scan files for import declarations based on specified module patterns",
 	"repository": "yuheiy/import-scanner",
 	"license": "MIT",
@@ -10,7 +10,9 @@
 		"types": "./dist/index.d.ts",
 		"default": "./dist/index.js"
 	},
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"build": "tsc --build",
 		"check": "biome check --write",
