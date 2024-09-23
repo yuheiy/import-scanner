@@ -1,6 +1,6 @@
 # @yuheiy/import-scanner
 
-Scan files for import declarations based on specified module patterns.
+Scan files for import declarations.
 
 Using the TypeScript Compiler API, it scans files for import declarations and retrieves their information.
 
@@ -15,17 +15,13 @@ npm install @yuheiy/import-scanner
 ```ts
 // src/index.ts
 import MyModule from 'my-module';
-import { a as A, b as B } from 'my-module/sub';
+import { a as A, b as B } from 'another-module';
 ```
 
 ```ts
 import { scanImportDeclarations } from '@yuheiy/import-scanner';
-import fg from 'fast-glob';
 
-const importDeclarations = await scanImportDeclarations(
-  ['my-module', /^my-module\//],
-	await fg('src/**/*.{js,ts,jsx,tsx}'),
-);
+const importDeclarations = scanImportDeclarations('src/index.ts');
 
 console.log(importDeclarations);
 /*
@@ -52,14 +48,14 @@ console.log(importDeclarations);
     "filePath": "src/index.ts",
     "position": {
       "start": 50,
-      "end": 97
+      "end": 98
     },
     "line": {
       "start": 3,
       "end": 3
     },
-    "statement": "import { a as A, b as B } from 'my-module/sub';",
-    "moduleSpecifierValue": "my-module/sub",
+    "statement": "import { a as A, b as B } from 'another-module';",
+    "moduleSpecifierValue": "another-module",
     "details": {
       "type": "named_imports",
       "elements": [
@@ -82,12 +78,12 @@ console.log(importDeclarations);
 
 ## API
 
-### scanImportDeclarations(modulePatterns, filePaths)
+### scanImportDeclarations(filePath)
 
-Return a `Promise<ScannedImportDeclaration[]>`.
+Return a `ScannedImportDeclaration[]`.
 
 ```ts
-export type ScannedImportDeclaration = {
+interface ScannedImportDeclarationBase<T> {
   filePath: string;
   position: {
     start: number;
@@ -99,42 +95,41 @@ export type ScannedImportDeclaration = {
   };
   statement: string;
   moduleSpecifierValue: string;
-  details:
-    | {
-        type: 'default_import';
-        isTypeOnly: boolean;
-        importedBinding: string;
-      }
-    | {
-        type: 'namespace_import';
-        isTypeOnly: boolean;
-        importedBinding: string;
-      }
-    | {
-        type: 'named_imports';
-        elements: {
-          isTypeOnly: boolean;
-          importedBinding: string;
-          moduleExportName: string;
-        }[];
-      }
-    | {
-        type: 'side_effect_import';
-      };
-};
+  details: T;
+}
+type ScannedDefaultImportDeclaration = ScannedImportDeclarationBase<{
+  type: "default_import";
+  isTypeOnly: boolean;
+  importedBinding: string;
+}>;
+type ScannedNamespaceImportDeclaration = ScannedImportDeclarationBase<{
+  type: "namespace_import";
+  isTypeOnly: boolean;
+  importedBinding: string;
+}>;
+type ScannedNamedImportDeclaration = ScannedImportDeclarationBase<{
+  type: "named_imports";
+  elements: {
+    isTypeOnly: boolean;
+    importedBinding: string;
+    moduleExportName: string;
+  }[];
+}>;
+type ScannedSideEffectImportDeclaration = ScannedImportDeclarationBase<{
+  type: "side_effect_import";
+}>;
+type ScannedImportDeclaration =
+  | ScannedDefaultImportDeclaration
+  | ScannedNamespaceImportDeclaration
+  | ScannedNamedImportDeclaration
+  | ScannedSideEffectImportDeclaration;
 ```
 
-#### modulePatterns
+#### filePath
 
-Type: `string | RegExp | (string | RegExp)[]`
+Type: `string`
 
-The patterns of modules for which to retrieve import declarations. If it’s a string, an exact match is required; if it’s a regular expression, any matching items will be targeted.
-
-#### filePaths
-
-Type: `string[]`
-
-The file paths to be scanned.
+The file path to be scanned.
 
 ## Related
 

@@ -1,7 +1,7 @@
 {
 	"name": "@yuheiy/import-scanner",
 	"version": "0.0.1",
-	"description": "Scan files for import declarations based on specified module patterns",
+	"description": "Scan files for import declarations",
 	"repository": "yuheiy/import-scanner",
 	"license": "MIT",
 	"author": "Yuhei Yasuda <yuhei.yasuda1003@gmail.com> (https://yuheiy.com/)",
