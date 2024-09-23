@@ -1,0 +1,39 @@
+{
+	"compilerOptions": {
+		/* Language and Environment */
+		"target": "ES2022", // Node.js 18
+		"lib": ["ES2023"],
+		"moduleDetection": "force",
+		/* Modules */
+		"module": "Node16",
+		"moduleResolution": "Node16",
+		"noUncheckedSideEffectImports": true,
+		/* Emit */
+		"declaration": true,
+		"declarationMap": true,
+		"sourceMap": true,
+		"outDir": "./dist",
+		"newLine": "lf",
+		"stripInternal": true,
+		"noEmitOnError": true,
+		/* Interop Constraints */
+		"verbatimModuleSyntax": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		/* Type Checking */
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"exactOptionalPropertyTypes": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitOverride": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"allowUnusedLabels": true,
+		"allowUnreachableCode": true,
+		/* Completeness */
+		"skipLibCheck": true
+	},
+	"include": ["src"]
+}
