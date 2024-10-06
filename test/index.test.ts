@@ -56,7 +56,7 @@ describe('scanImportDeclarations', () => {
 			[
 			  {
 			    "details": {
-			      "importedBinding": "",
+			      "importedBinding": "m1",
 			      "isTypeOnly": false,
 			      "type": "namespace_import",
 			    },
@@ -74,7 +74,7 @@ describe('scanImportDeclarations', () => {
 			  },
 			  {
 			    "details": {
-			      "importedBinding": "",
+			      "importedBinding": "m2",
 			      "isTypeOnly": true,
 			      "type": "namespace_import",
 			    },

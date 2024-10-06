@@ -99,7 +99,9 @@ export function scanImportDeclarations(
 					details: {
 						type: 'namespace_import',
 						isTypeOnly: importClause?.isTypeOnly() ?? false,
-						importedBinding: importClause?.getSymbol()?.getName() ?? '',
+						importedBinding:
+							importClause?.getNamedBindings()?.getSymbolOrThrow().getName() ??
+							'',
 					},
 				});
 				break;
