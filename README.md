@@ -58,6 +58,7 @@ console.log(importDeclarations);
     "moduleSpecifierValue": "another-module",
     "details": {
       "type": "named_imports",
+      "isTypeOnly": false,
       "elements": [
         {
           "isTypeOnly": false,
@@ -109,6 +110,7 @@ type ScannedNamespaceImportDeclaration = ScannedImportDeclarationBase<{
 }>;
 type ScannedNamedImportDeclaration = ScannedImportDeclarationBase<{
   type: "named_imports";
+	isTypeOnly: boolean;
   elements: {
     isTypeOnly: boolean;
     importedBinding: string;
