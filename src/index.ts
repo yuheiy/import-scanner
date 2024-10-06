@@ -64,7 +64,7 @@ export function scanImportDeclarations(
 		const namespaceImport = importDeclaration.getNamespaceImport();
 		const namedImports = importDeclaration.getNamedImports();
 
-		const sharedProps = {
+		const generalProps = {
 			filePath,
 			position: {
 				start: importDeclaration.getStart(),
@@ -80,28 +80,29 @@ export function scanImportDeclarations(
 
 		switch (true) {
 			case defaultImport !== undefined: {
-				const importClause = importDeclaration.getImportClause();
+				const importClause = importDeclaration.getImportClauseOrThrow();
 				result.push({
-					...sharedProps,
+					...generalProps,
 					details: {
 						type: 'default_import',
-						isTypeOnly: importClause?.isTypeOnly() ?? false,
-						importedBinding: importClause?.getSymbol()?.getName() ?? '',
+						isTypeOnly: importClause.isTypeOnly(),
+						importedBinding: importClause.getSymbolOrThrow().getName(),
 					},
 				});
 				break;
 			}
 
 			case namespaceImport !== undefined: {
-				const importClause = importDeclaration.getImportClause();
+				const importClause = importDeclaration.getImportClauseOrThrow();
 				result.push({
-					...sharedProps,
+					...generalProps,
 					details: {
 						type: 'namespace_import',
-						isTypeOnly: importClause?.isTypeOnly() ?? false,
-						importedBinding:
-							importClause?.getNamedBindings()?.getSymbolOrThrow().getName() ??
-							'',
+						isTypeOnly: importClause.isTypeOnly(),
+						importedBinding: importClause
+							.getNamedBindingsOrThrow()
+							.getSymbolOrThrow()
+							.getName(),
 					},
 				});
 				break;
@@ -109,12 +110,12 @@ export function scanImportDeclarations(
 
 			case namedImports.length > 0: {
 				result.push({
-					...sharedProps,
+					...generalProps,
 					details: {
 						type: 'named_imports',
 						elements: namedImports.map((namedImport) => ({
 							isTypeOnly: namedImport.isTypeOnly(),
-							importedBinding: namedImport.getSymbol()?.getName() ?? '',
+							importedBinding: namedImport.getSymbolOrThrow().getName(),
 							moduleExportName: namedImport.getName(),
 						})),
 					},
@@ -124,7 +125,7 @@ export function scanImportDeclarations(
 
 			default: {
 				result.push({
-					...sharedProps,
+					...generalProps,
 					details: {
 						type: 'side_effect_import',
 					},
