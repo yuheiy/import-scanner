@@ -29,6 +29,7 @@ export type ScannedNamespaceImportDeclaration = ScannedImportDeclarationBase<{
 
 export type ScannedNamedImportDeclaration = ScannedImportDeclarationBase<{
 	type: 'named_imports';
+	isTypeOnly: boolean;
 	elements: {
 		isTypeOnly: boolean;
 		importedBinding: string;
@@ -108,29 +109,29 @@ export function scanImportDeclarations(
 				break;
 			}
 
-			case namedImports.length > 0: {
-				result.push({
-					...generalProps,
-					details: {
-						type: 'named_imports',
-						elements: namedImports.map((namedImport) => ({
-							isTypeOnly: namedImport.isTypeOnly(),
-							importedBinding: namedImport.getSymbolOrThrow().getName(),
-							moduleExportName: namedImport.getName(),
-						})),
-					},
-				});
-				break;
-			}
-
 			default: {
-				result.push({
-					...generalProps,
-					details: {
-						type: 'side_effect_import',
-					},
-				});
-				break;
+				const importClause = importDeclaration.getImportClause();
+				if (importClause) {
+					result.push({
+						...generalProps,
+						details: {
+							type: 'named_imports',
+							isTypeOnly: importClause.isTypeOnly(),
+							elements: namedImports.map((namedImport) => ({
+								isTypeOnly: namedImport.isTypeOnly(),
+								importedBinding: namedImport.getSymbolOrThrow().getName(),
+								moduleExportName: namedImport.getName(),
+							})),
+						},
+					});
+				} else {
+					result.push({
+						...generalProps,
+						details: {
+							type: 'side_effect_import',
+						},
+					});
+				}
 			}
 		}
 	}

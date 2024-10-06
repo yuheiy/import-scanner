@@ -88,6 +88,7 @@ describe('scanImportDeclarations', () => {
 			{
 				details: {
 					type: 'named_imports',
+					isTypeOnly: false,
 					elements: [
 						{
 							isTypeOnly: false,
@@ -96,7 +97,7 @@ describe('scanImportDeclarations', () => {
 						},
 						{
 							isTypeOnly: false,
-							importedBinding: 'm2',
+							importedBinding: 'm2_',
 							moduleExportName: 'm2',
 						},
 					],
@@ -105,6 +106,7 @@ describe('scanImportDeclarations', () => {
 			{
 				details: {
 					type: 'named_imports',
+					isTypeOnly: true,
 					elements: [
 						{
 							isTypeOnly: false,
@@ -112,6 +114,26 @@ describe('scanImportDeclarations', () => {
 							moduleExportName: 'm3',
 						},
 					],
+				},
+			},
+			{
+				details: {
+					type: 'named_imports',
+					isTypeOnly: false,
+					elements: [
+						{
+							isTypeOnly: true,
+							importedBinding: 'm4',
+							moduleExportName: 'm4',
+						},
+					],
+				},
+			},
+			{
+				details: {
+					type: 'named_imports',
+					isTypeOnly: false,
+					elements: [],
 				},
 			},
 		]);
