@@ -1,6 +1,6 @@
 {
 	"name": "@yuheiy/import-scanner",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Scan files for import declarations",
 	"repository": "yuheiy/import-scanner",
 	"license": "MIT",
