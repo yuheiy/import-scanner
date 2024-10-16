@@ -110,7 +110,7 @@ type ScannedNamespaceImportDeclaration = ScannedImportDeclarationBase<{
 }>;
 type ScannedNamedImportDeclaration = ScannedImportDeclarationBase<{
   type: "named_imports";
-	isTypeOnly: boolean;
+  isTypeOnly: boolean;
   elements: {
     isTypeOnly: boolean;
     importedBinding: string;
