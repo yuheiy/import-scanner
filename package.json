@@ -2,7 +2,10 @@
 	"name": "@yuheiy/import-scanner",
 	"version": "0.0.4",
 	"description": "Scan files for import declarations",
-	"repository": "yuheiy/import-scanner",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/yuheiy/import-scanner.git"
+	},
 	"license": "MIT",
 	"author": "Yuhei Yasuda <yuhei.yasuda1003@gmail.com> (https://yuheiy.com/)",
 	"type": "module",
