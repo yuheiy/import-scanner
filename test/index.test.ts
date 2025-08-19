@@ -151,4 +151,19 @@ describe('scanImportDeclarations', () => {
 			},
 		]);
 	});
+
+	test('import with attributes', () => {
+		const actual = scanImportDeclarations(
+			'test/__fixtures__/import-with-attributes.ts',
+		);
+		expect(actual.map(({ details }) => ({ details }))).toStrictEqual([
+			{
+				details: {
+					type: 'default_import',
+					isTypeOnly: false,
+					importedBinding: 'data',
+				},
+			},
+		]);
+	});
 });
