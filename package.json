@@ -21,7 +21,7 @@
 		"test": "vitest"
 	},
 	"dependencies": {
-		"ts-morph": "^23.0.0"
+		"ts-morph": "^26.0.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.2",
