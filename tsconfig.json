@@ -34,5 +34,6 @@
 		"allowUnreachableCode": true,
 		/* Completeness */
 		"skipLibCheck": true
-	}
+	},
+	"include": ["src"]
 }

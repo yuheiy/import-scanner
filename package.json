@@ -7,11 +7,11 @@
 	"author": "Yuhei Yasuda <yuhei.yasuda1003@gmail.com> (https://yuheiy.com/)",
 	"type": "module",
 	"exports": {
-		"types": "./dist/src/index.d.ts",
-		"default": "./dist/src/index.js"
+		".": "./dist/index.js",
+		"./package.json": "./package.json"
 	},
 	"files": [
-		"dist/src"
+		"dist"
 	],
 	"scripts": {
 		"build": "tsc --build",
