@@ -1,6 +1,6 @@
 {
 	"name": "@yuheiy/import-scanner",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "Scan files for import declarations",
 	"repository": {
 		"type": "git",
